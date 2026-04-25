@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Julius Ivan Alegre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --bg-card: #13131a;
+      --bg-hover: #1a1a24;
+      --border: rgba(255,255,255,0.08);
+      --border-accent: rgba(255,255,255,0.18);
+      --text: #e8e8f0;
+      --text-muted: #6e6e82;
+      --text-dim: #3a3a50;
+      --accent: #7c6dfa;
+      --accent-soft: rgba(124,109,250,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(13,13,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    .page-header {
+      max-width: 900px; margin: 0 auto;
+      padding: 9rem 2rem 3rem;
+    }
+    .page-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 500px;
+    }
+
+    .projects-container {
+      max-width: 900px; margin: 0 auto;
+      padding: 1rem 2rem 6rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, background 0.2s;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+    .project-card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-hover);
+    }
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .project-card h2 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .project-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(124,109,250,0.2);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .project-links {
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .link-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .link-btn:hover {
+      color: var(--text);
+      border-color: var(--border-accent);
+    }
+    .link-btn svg {
+      width: 11px; height: 11px;
+      fill: none; stroke: currentColor; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* PLACEHOLDER NOTE */
+    .add-note {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      margin-top: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .project-card { grid-template-columns: 1fr; }
+      .project-links { flex-direction: row; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">jia.dev</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+    <li><a href="contact.html">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-tag">// work</p>
+  <h1>Projects</h1>
+  <p>A selection of things I've built — from algorithm-driven planners to ML-powered mobile apps.</p>
+</div>
+
+<main class="projects-container">
+
+  <div class="project-card fade-in">
+    <div>
+      <p class="project-number">01</p>
+      <h2>LAKAW: Smart Travel Planner</h2>
+      <p>Route optimization system that generates intelligent travel itineraries using A*, Floyd-Warshall, and Genetic Algorithms. Contributed as backend developer responsible for algorithm integration and API layer.</p>
+      <div class="project-tags">
+        <span class="project-tag">Algorithms</span>
+        <span class="project-tag">Backend</span>
+        <span class="project-tag">REST API</span>
+        <span class="project-tag">Route Optimization</span>
+      </div>
+    </div>
+    <div class="project-links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="project-card fade-in">
+    <div>
+      <p class="project-number">02</p>
+      <h2>Ingredient Detection Recipe App</h2>
+      <p>Android application that uses image processing and machine learning to identify ingredients from photos and suggest matching recipes. Combines computer vision with a practical everyday use case.</p>
+      <div class="project-tags">
+        <span class="project-tag">Android</span>
+        <span class="project-tag">Machine Learning</span>
+        <span class="project-tag">Image Processing</span>
+        <span class="project-tag">Dart</span>
+      </div>
+    </div>
+    <div class="project-links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="project-card fade-in">
+    <div>
+      <p class="project-number">03</p>
+      <h2>Climate Vulnerability Index</h2>
+      <p>Data mining project applying K-Means clustering on weather datasets to identify and visualize regional climate vulnerability patterns. Built for research and policy analysis use cases.</p>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Data Mining</span>
+        <span class="project-tag">K-Means</span>
+        <span class="project-tag">R</span>
+      </div>
+    </div>
+    <div class="project-links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="project-card fade-in">
+    <div>
+      <p class="project-number">04</p>
+      <h2>Child Labor Case Monitoring System</h2>
+      <p>Full-stack web system for DOLE's Child Labor Prevention and Elimination Program. Handles case profiling, monitoring dashboards, and secure role-based access control across multiple user types.</p>
+      <div class="project-tags">
+        <span class="project-tag">Laravel</span>
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">Angular</span>
+        <span class="project-tag">REST API</span>
+        <span class="project-tag">Auth</span>
+      </div>
+    </div>
+    <div class="project-links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="add-note">
+    + more projects coming soon
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2025 Julius Ivan Alegre &nbsp;·&nbsp; Built with care, deployed on GitHub Pages</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Julius Ivan Alegre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --bg-card: #13131a;
+      --bg-hover: #1a1a24;
+      --border: rgba(255,255,255,0.08);
+      --border-accent: rgba(255,255,255,0.18);
+      --text: #e8e8f0;
+      --text-muted: #6e6e82;
+      --text-dim: #3a3a50;
+      --accent: #7c6dfa;
+      --accent-soft: rgba(124,109,250,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(13,13,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    .contact-wrapper {
+      max-width: 700px; margin: 0 auto;
+      padding: 9rem 2rem 6rem;
+    }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 3rem;
+      max-width: 440px;
+    }
+
+    /* CONTACT LINKS */
+    .contact-links { display: flex; flex-direction: column; gap: 1px; margin-bottom: 3rem; }
+    .contact-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      margin-bottom: 8px;
+    }
+    .contact-link:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-accent);
+      transform: translateX(4px);
+    }
+    .contact-link-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .contact-icon {
+      width: 32px; height: 32px;
+      border-radius: 7px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(124,109,250,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-icon svg {
+      width: 14px; height: 14px;
+      fill: none; stroke: var(--accent); stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .contact-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1px;
+    }
+    .contact-value {
+      font-size: 13px;
+      color: var(--text);
+    }
+    .arrow {
+      color: var(--text-dim);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .contact-link:hover .arrow { color: var(--text-muted); }
+
+    /* AVAILABILITY */
+    .availability-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+    }
+    .availability-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .availability-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .avail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+    .avail-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 6rem;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">jia.dev</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html">projects</a></li>
+    <li><a href="contact.html" class="active">contact</a></li>
+  </ul>
+</nav>
+
+<main class="contact-wrapper">
+  <p class="page-tag">// reach out</p>
+  <h1>Let's connect.</h1>
+  <p class="subtitle">I'm open to full-time roles, freelance projects, and collaborations. Feel free to reach out through any channel below.</p>
+
+  <div class="contact-links fade-in">
+    <a href="mailto:alegre.juliusivan.arena@gmail.com" class="contact-link">
+      <div class="contact-link-left">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">alegre.juliusivan.arena@gmail.com</span>
+        </div>
+      </div>
+      <span class="arrow">↗</span>
+    </a>
+
+    <a href="https://linkedin.com/in/julius-ivan-alegre" target="_blank" rel="noopener" class="contact-link">
+      <div class="contact-link-left">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/julius-ivan-alegre</span>
+        </div>
+      </div>
+      <span class="arrow">↗</span>
+    </a>
+
+    <a href="tel:+639617270004" class="contact-link">
+      <div class="contact-link-left">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+63 961 727 0004</span>
+        </div>
+      </div>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <div class="availability-card fade-in">
+    <h3>Availability</h3>
+    <p>Currently open to backend, full-stack, and technical support roles. Based in the Philippines — available for remote or on-site work.</p>
+    <div class="avail-tags">
+      <span class="avail-tag">Full-time</span>
+      <span class="avail-tag">Freelance</span>
+      <span class="avail-tag">Remote OK</span>
+      <span class="avail-tag">Philippines</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Julius Ivan Alegre &nbsp;·&nbsp; Built with care, deployed on GitHub Pages</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
