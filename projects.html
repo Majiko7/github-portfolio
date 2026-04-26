@@ -13,6 +13,7 @@
       --border: rgba(255,255,255,0.08); --border-accent: rgba(255,255,255,0.18);
       --text: #e8e8f0; --text-muted: #6e6e82; --text-dim: #3a3a50;
       --accent: #7c6dfa; --accent-soft: rgba(124,109,250,0.12);
+      --amber: #f59e0b; --amber-soft: rgba(245,158,11,0.1);
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; font-size: 15px; line-height: 1.7; }
@@ -31,12 +32,26 @@
     .project-number { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); margin-bottom: 0.5rem; }
     .project-card h2 { font-size: 15px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
     .project-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
     .project-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(124,109,250,0.2); padding: 3px 8px; border-radius: 4px; }
     .project-links { display: flex; gap: 8px; flex-direction: column; align-items: flex-end; }
     .link-btn { display: inline-flex; align-items: center; gap: 5px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 10px; border-radius: 5px; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
     .link-btn:hover { color: var(--text); border-color: var(--border-accent); }
     .link-btn svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Private notice badge */
+    .private-notice {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      color: var(--amber);
+      background: var(--amber-soft);
+      border: 1px solid rgba(245,158,11,0.2);
+      padding: 4px 9px; border-radius: 5px;
+      white-space: nowrap; letter-spacing: 0.03em;
+    }
+    .private-notice svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* Carousel */
     .carousel { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 1.25rem; background: var(--bg); }
     .carousel-track { display: flex; height: 100%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .carousel-track img { flex-shrink: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; user-select: none; -webkit-user-drag: none; }
@@ -50,11 +65,12 @@
     .carousel-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s, transform 0.2s; border: none; padding: 0; }
     .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
     .carousel[data-count="1"] .carousel-btn, .carousel[data-count="1"] .carousel-dots { display: none; }
+
     .add-note { border: 1px dashed var(--border); border-radius: 10px; padding: 2rem; text-align: center; color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; margin-top: 1.5rem; }
     footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-    @media (max-width: 600px) { .project-card { grid-template-columns: 1fr; } .project-links { flex-direction: row; align-items: flex-start; } }
+    @media (max-width: 600px) { .project-card { grid-template-columns: 1fr; } .project-links { flex-direction: row; align-items: flex-start; flex-wrap: wrap; } }
   </style>
 </head>
 <body>
@@ -83,7 +99,7 @@
     <div>
       <p class="project-number">01</p>
       <h2>LAKAW: Smart Travel Planner</h2>
-      <!-- CAROUSEL 01 ── add <img> tags inside the track to add screenshots -->
+      <!-- CAROUSEL 01 ── add/remove <img> tags to update screenshots -->
       <div class="carousel" id="c01">
         <div class="carousel-track">
           <img src="assets/img/lakaw-01.jpg" alt="LAKAW screen 1">
@@ -103,7 +119,6 @@
       </div>
     </div>
     <div class="project-links">
-      <!-- 01 LAKAW: paste GitHub repo URL in href below -->
       <a href="https://github.com/Majiko7/-LAKAW-Smart-Travel-Planner.git" target="_blank" rel="noopener" class="link-btn">
         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         GitHub
@@ -112,7 +127,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
-       PROJECT 02 — HR INFORMATION SYSTEM (NEW)
+       PROJECT 02 — HR INFORMATION SYSTEM
        ═══════════════════════════════════════════ -->
   <div class="project-card fade-in">
     <div>
@@ -121,8 +136,10 @@
       <!-- CAROUSEL 02 ── add <img> tags inside the track to add screenshots -->
       <div class="carousel" id="c02">
         <div class="carousel-track">
-          <!-- <img src="assets/img/hris-01.png" alt="HRIS screen 1"> -->
-          <!-- <img src="assets/img/hris-02.png" alt="HRIS screen 2"> -->
+          <img src="assets/img/hris-01.png" alt="HRIS screen 1">
+          <img src="assets/img/hris-02.png" alt="HRIS screen 2">
+          <img src="assets/img/hris-03.png" alt="HRIS screen 3">
+          <img src="assets/img/hris-04.png" alt="HRIS screen 4">
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -137,7 +154,11 @@
         <span class="project-tag">MySQL</span>
       </div>
     </div>
-      </a>
+    <div class="project-links">
+      <span class="private-notice">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Private — NDA
+      </span>
     </div>
   </div>
 
@@ -167,7 +188,6 @@
       </div>
     </div>
     <div class="project-links">
-      <!-- 03 Recipe App: paste GitHub repo URL in href below -->
       <a href="https://github.com/Abcinsy/aiBITES.git" target="_blank" rel="noopener" class="link-btn">
         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         GitHub
@@ -185,8 +205,8 @@
       <!-- CAROUSEL 04 ── add <img> tags inside the track to add screenshots -->
       <div class="carousel" id="c04">
         <div class="carousel-track">
-          <!-- <img src="assets/img/climate-01.png" alt="Climate chart 1"> -->
-          <!-- <img src="assets/img/climate-02.png" alt="Climate chart 2"> -->
+          <img src="assets/img/climate-01.png" alt="Climate chart 1">
+          <img src="assets/img/climate-02.png" alt="Climate chart 2">
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -201,16 +221,10 @@
       </div>
     </div>
     <div class="project-links">
-      <!-- 04 Climate Index: paste GitHub repo URL in href below -->
-      <a href="PASTE_CLIMATE_GITHUB_URL_HERE" target="_blank" rel="noopener" class="link-btn">
-        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub
-      </a>
-      <!-- 04 Climate Index: paste Colab/demo URL in href below — delete this <a> if no demo -->
-      <a href="PASTE_CLIMATE_DEMO_URL_HERE" target="_blank" rel="noopener" class="link-btn">
-        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Live Demo
-      </a>
+      <span class="private-notice">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Private — Data Security
+      </span>
     </div>
   </div>
 
@@ -236,17 +250,20 @@
       <div class="project-tags">
         <span class="project-tag">Laravel</span>
         <span class="project-tag">MySQL</span>
-        <span class="project-tag">Angular</span>
+        <span class="project-tag">Livewire</span>
         <span class="project-tag">REST API</span>
         <span class="project-tag">Auth</span>
       </div>
     </div>
     <div class="project-links">
-      <!-- 05 DOLE: GitHub URL already set -->
       <a href="https://github.com/Majiko7/CLPMS.git" target="_blank" rel="noopener" class="link-btn">
         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         GitHub
       </a>
+      <span class="private-notice">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Gov. Data — No Live Demo
+      </span>
     </div>
   </div>
 
