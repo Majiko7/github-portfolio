@@ -39,22 +39,44 @@
     .link-btn:hover { color: var(--text); border-color: var(--border-accent); }
     .link-btn svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Private notice badge */
-    .private-notice {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-family: 'DM Mono', monospace; font-size: 10px;
-      color: var(--amber);
-      background: var(--amber-soft);
-      border: 1px solid rgba(245,158,11,0.2);
-      padding: 4px 9px; border-radius: 5px;
-      white-space: nowrap; letter-spacing: 0.03em;
-    }
+    .private-notice { display: inline-flex; align-items: center; gap: 5px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--amber); background: var(--amber-soft); border: 1px solid rgba(245,158,11,0.2); padding: 4px 9px; border-radius: 5px; white-space: nowrap; letter-spacing: 0.03em; }
     .private-notice svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-    /* Carousel */
-    .carousel { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 1.25rem; background: var(--bg); }
-    .carousel-track { display: flex; height: 100%; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .carousel-track img { flex-shrink: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; user-select: none; -webkit-user-drag: none; }
+    /* ── CAROUSEL ──
+       No fixed aspect-ratio — height is driven by the image itself.
+       object-fit: contain shows the full image with no cropping.
+       The dark bg fills any letterbox/pillarbox gaps.               */
+    .carousel {
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      background: var(--bg);
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .carousel-slide {
+      flex-shrink: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; background: rgba(13,13,15,0.75); border: 1px solid var(--border-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); transition: background 0.2s, opacity 0.2s; z-index: 2; padding: 0; }
     .carousel-btn:hover { background: rgba(13,13,15,0.95); }
     .carousel-btn svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -64,7 +86,8 @@
     .carousel-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 2; }
     .carousel-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s, transform 0.2s; border: none; padding: 0; }
     .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
-    .carousel[data-count="1"] .carousel-btn, .carousel[data-count="1"] .carousel-dots { display: none; }
+    .carousel[data-count="1"] .carousel-btn,
+    .carousel[data-count="1"] .carousel-dots { display: none; }
 
     .add-note { border: 1px dashed var(--border); border-radius: 10px; padding: 2rem; text-align: center; color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; margin-top: 1.5rem; }
     footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
@@ -99,12 +122,11 @@
     <div>
       <p class="project-number">01</p>
       <h2>LAKAW: Smart Travel Planner</h2>
-      <!-- CAROUSEL 01 ── add/remove <img> tags to update screenshots -->
       <div class="carousel" id="c01">
         <div class="carousel-track">
-          <img src="assets/img/lakaw-01.jpg" alt="LAKAW screen 1">
-          <img src="assets/img/lakaw-02.jpg" alt="LAKAW screen 2">
-          <img src="assets/img/lakaw-03.jpg" alt="LAKAW screen 3">
+          <div class="carousel-slide"><img src="assets/img/lakaw-01.jpg" alt="LAKAW screen 1"></div>
+          <div class="carousel-slide"><img src="assets/img/lakaw-02.jpg" alt="LAKAW screen 2"></div>
+          <div class="carousel-slide"><img src="assets/img/lakaw-03.jpg" alt="LAKAW screen 3"></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -133,13 +155,12 @@
     <div>
       <p class="project-number">02</p>
       <h2>Human Resource Information System</h2>
-      <!-- CAROUSEL 02 ── add <img> tags inside the track to add screenshots -->
       <div class="carousel" id="c02">
         <div class="carousel-track">
-          <img src="assets/img/hris-01.jpg" alt="HRIS screen 1">
-          <img src="assets/img/hris-02.jpg" alt="HRIS screen 2">
-          <img src="assets/img/hris-03.jpg" alt="HRIS screen 3">
-          <img src="assets/img/hris-04.jpg" alt="HRIS screen 4">
+          <div class="carousel-slide"><img src="assets/img/hris-01.jpg" alt="HRIS screen 1"></div>
+          <div class="carousel-slide"><img src="assets/img/hris-02.jpg" alt="HRIS screen 2"></div>
+          <div class="carousel-slide"><img src="assets/img/hris-03.jpg" alt="HRIS screen 3"></div>
+          <div class="carousel-slide"><img src="assets/img/hris-04.jpg" alt="HRIS screen 4"></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -169,11 +190,10 @@
     <div>
       <p class="project-number">03</p>
       <h2>Ingredient Detection Recipe App</h2>
-      <!-- CAROUSEL 03 ── add <img> tags inside the track to add screenshots -->
       <div class="carousel" id="c03">
         <div class="carousel-track">
-          <img src="assets/img/recipe-01.jpg" alt="Recipe App screen 1">
-          <!-- <img src="assets/img/recipe-02.jpg" alt="Recipe App screen 2"> -->
+          <div class="carousel-slide"><img src="assets/img/recipe-01.jpg" alt="Recipe App screen 1"></div>
+          <!-- <div class="carousel-slide"><img src="assets/img/recipe-02.jpg" alt="Recipe App screen 2"></div> -->
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -202,11 +222,10 @@
     <div>
       <p class="project-number">04</p>
       <h2>Climate Vulnerability Index</h2>
-      <!-- CAROUSEL 04 ── add <img> tags inside the track to add screenshots -->
       <div class="carousel" id="c04">
         <div class="carousel-track">
-          <img src="assets/img/climate-01.png" alt="Climate chart 1">
-          <img src="assets/img/climate-02.png" alt="Climate chart 2">
+          <div class="carousel-slide"><img src="assets/img/climate-01.png" alt="Climate chart 1"></div>
+          <div class="carousel-slide"><img src="assets/img/climate-02.png" alt="Climate chart 2"></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -235,12 +254,11 @@
     <div>
       <p class="project-number">05</p>
       <h2>Child Labor Case Monitoring System</h2>
-      <!-- CAROUSEL 05 ── add more <img> tags inside the track for more screenshots -->
       <div class="carousel" id="c05">
         <div class="carousel-track">
-          <img src="assets/img/dole-login.png" alt="CLPMS login screen">
-          <img src="assets/img/dole-dashboard.png" alt="CLPMS dashboard">
-          <img src="assets/img/dole-reports.png" alt="CLPMS reports">
+          <div class="carousel-slide"><img src="assets/img/dole-login.png" alt="CLPMS login screen"></div>
+          <div class="carousel-slide"><img src="assets/img/dole-dashboard.png" alt="CLPMS dashboard"></div>
+          <div class="carousel-slide"><img src="assets/img/dole-reports.png" alt="CLPMS reports"></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="carousel-btn next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -280,7 +298,7 @@
 <script>
   document.querySelectorAll('.carousel').forEach(carousel => {
     const track = carousel.querySelector('.carousel-track');
-    const slides = Array.from(track.querySelectorAll('img'));
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
     const count = slides.length;
     if (count === 0) { carousel.style.display = 'none'; return; }
     carousel.setAttribute('data-count', count);
@@ -288,6 +306,7 @@
     const prevBtn = carousel.querySelector('.carousel-btn.prev');
     const nextBtn = carousel.querySelector('.carousel-btn.next');
     let current = 0;
+
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -295,23 +314,29 @@
       dot.addEventListener('click', () => goTo(i));
       dotsContainer.appendChild(dot);
     });
+
     function goTo(index) {
       current = Math.max(0, Math.min(index, count - 1));
+      // Each slide is 100% wide so offset by slide width
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
       dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
       prevBtn.classList.toggle('hidden', current === 0);
       nextBtn.classList.toggle('hidden', current === count - 1);
     }
+
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
+
     let startX = 0;
     track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
     });
+
     goTo(0);
   });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
   }, { threshold: 0.05 });
